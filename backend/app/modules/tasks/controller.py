@@ -15,6 +15,6 @@ def get_tasks(db:Session = Depends(get_db)):
     return task_service.get_all_task()
 
 @router.post("/", response_model = TaskResponse)
-def create_task(task:TaskBase, db:Session):
+def create_task(task:TaskBase, db:Session = Depends(get_db)):
     task_service = TaskService(db)
     return task_service.create(task)
