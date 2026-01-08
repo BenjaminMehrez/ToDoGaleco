@@ -12,6 +12,9 @@ class TaskService:
     def get_all_task(self) -> List[Task]:
         return self.repository.get_all()
     
+    def get_by_id(self,id) -> List[Task]:
+        return self.repository.get_by_id(id)
+    
     def create(self,task_data:TaskBase) -> Task:
         db_task = Task(
             title = task_data.title,

@@ -11,7 +11,12 @@ settings = get_settings()
 # Create the database tables
 create_tables()
 
-app = FastAPI()
+
+app = FastAPI(
+    swagger_ui_parameters={
+        "theme": "dark"
+    }
+)
 
 app.include_router(task_router)
 

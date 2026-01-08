@@ -9,6 +9,9 @@ class TaskRepository():
     def get_all(self) -> List[Task]:
         return self.db.query(Task).all()
     
+    def get_by_id(self,id) -> List[Task]:
+        return self.db.query(Task).filter(Task.id == id)
+    
     def create(self,task:Task) -> Task:
         self.db.add(task)
         self.db.commit()
