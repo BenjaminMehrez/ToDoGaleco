@@ -15,6 +15,9 @@ class TaskService:
     def get_by_id(self,id) -> List[Task]:
         return self.repository.get_by_id(id)
     
+    def update(self,id,clave,valor) ->List[Task]:
+        return self.repository.update_task(id,clave,valor)
+    
     def create(self,task_data:TaskBase) -> Task:
         db_task = Task(
             title = task_data.title,

@@ -12,6 +12,15 @@ class TaskRepository():
     def get_by_id(self,id) -> List[Task]:
         return self.db.query(Task).filter(Task.id == id)
     
+    def update_task(self,id,clave,valor) -> List[Task]:
+        clave = clave
+        self.db.query(Task).filter(Task.id == id).update({clave:valor})
+        print()
+        return self.db.query(Task).filter(Task.id == id)
+        
+        
+        
+    
     def create(self,task:Task) -> Task:
         self.db.add(task)
         self.db.commit()

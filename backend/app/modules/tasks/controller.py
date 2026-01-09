@@ -5,69 +5,11 @@ from .service import TaskService
 from typing import List
 from .schemas import TaskResponse,TaskBase
 from app.core.config import get_settings
+from uuid import UUID
+
 
 settings = get_settings()
 router = APIRouter(prefix = "/api/task",tags = ["tasks"])
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @router.get("/", response_model = List[TaskResponse])
 def get_tasks(db:Session = Depends(get_db)):
@@ -84,4 +26,17 @@ def get_tasks_by_id(id,db:Session = Depends(get_db)):
 def create_task(task:TaskBase, db:Session = Depends(get_db)):
     task_service = TaskService(db)
     return task_service.create(task)
+
+@router.post("/update", response_model = List[TaskResponse])
+def update_task(id: UUID,clave,valor, db:Session = Depends(get_db)):
+    task_service = TaskService(db)
+    if valor == "True":
+        valor = True
+    elif valor == "False":
+        valor = False
+    task_service.update(id,clave,valor)
+    return task_service.get_by_id(id)
+    
+
+
 
