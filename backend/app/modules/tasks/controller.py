@@ -6,6 +6,7 @@ from typing import List
 from .schemas import TaskResponse,TaskBase
 from app.core.config import get_settings
 from uuid import UUID
+from typing import Any
 
 
 settings = get_settings()
@@ -18,7 +19,7 @@ def get_tasks(db:Session = Depends(get_db)):
 
 
 @router.get("/id", response_model = List[TaskResponse])
-def get_tasks_by_id(id,db:Session = Depends(get_db)):
+def get_tasks_by_id(id:str,db:Session = Depends(get_db)):
     task_service = TaskService(db)
     return task_service.get_by_id(id)
 
@@ -28,7 +29,7 @@ def create_task(task:TaskBase, db:Session = Depends(get_db)):
     return task_service.create(task)
 
 @router.post("/update", response_model = List[TaskResponse])
-def update_task(id: UUID,clave,valor, db:Session = Depends(get_db)):
+def update_task(id: UUID,clave:str, valor:Any, db:Session = Depends(get_db)):
     task_service = TaskService(db)
     if valor == "True":
         valor = True

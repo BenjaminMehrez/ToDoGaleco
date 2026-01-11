@@ -15,7 +15,7 @@ class TaskRepository():
     def update_task(self,id,clave,valor) -> List[Task]:
         clave = clave
         self.db.query(Task).filter(Task.id == id).update({clave:valor})
-        print()
+        self.db.commit()
         return self.db.query(Task).filter(Task.id == id)
         
         
