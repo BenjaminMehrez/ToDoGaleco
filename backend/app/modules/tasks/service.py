@@ -12,11 +12,21 @@ class TaskService:
     def get_all_task(self) -> List[Task]:
         return self.repository.get_all()
     
+    def get_true(self) -> List[Task]:
+        return self.repository.get_true()
+    
+    def get_false(self) -> List[Task]:
+        return self.repository.get_false()
+    
     def get_by_id(self,id) -> List[Task]:
         return self.repository.get_by_id(id)
     
     def update(self,id,clave,valor) ->List[Task]:
         return self.repository.update_task(id,clave,valor)
+    
+    def delete(self,id):
+        return self.repository.delete_task(id)
+    
     
     def create(self,task_data:TaskBase) -> Task:
         db_task = Task(
